@@ -1,0 +1,3 @@
+.vagrant
+*.ovpn
+client_credentials
