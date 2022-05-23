@@ -1,3 +1,4 @@
 .vagrant
 *.ovpn
 client_credentials
+local.config.yml

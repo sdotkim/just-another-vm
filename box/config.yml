@@ -1,0 +1,32 @@
+# The config merge mechanism borrowed from DrupalVM See:
+# https://github.com/geerlingguy/drupal-vm
+
+vagrant_box: archlinux/archlinux
+
+vagrant_user: vagrant
+vagrant_gui: true
+
+vagrant_vbox_linked_clone: false
+vagrant_hostname: javm
+vagrant_machine_name: javm
+vagrant_ip: 192.168.56.10
+
+# Memory and CPU to use for this VM.
+vagrant_memory: 4096
+vagrant_cpus: 4
+
+
+# @todo add NFS support? see
+# http://docs.drupalvm.com/en/latest/other/performance/
+vagrant_synced_folder_default_type: virtualbox
+
+# A list of synced folders, with the keys 'local_path', 'destination', and
+# a 'type' of [nfs|rsync|smb] (leave empty for slow native shares). See
+# http://docs.drupalvm.com/en/latest/getting-started/syncing-folders/ for more.
+vagrant_synced_folders:
+  # The first synced folder will be used for the default Drupal installation, if
+  # any of the build_* settings are 'true'. By default the folder is set to
+  # the drupal-vm folder.
+  - local_path: .
+    destination: /vagrant
+    create: true
