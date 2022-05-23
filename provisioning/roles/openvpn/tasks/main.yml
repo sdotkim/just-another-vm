@@ -1,0 +1,38 @@
+---
+- name: Copy OpenVPN configs
+  ansible.builtin.copy:
+    src: /vagrant/etc/openvpn/configs
+    dest: /etc/openvpn/client/
+    force: yes
+
+- name: Copy OpenVPN credentials
+  ansible.builtin.copy:
+    src: /vagrant/etc/openvpn/client/client_credentials
+    dest: /etc/openvpn/client/
+    force: yes
+
+- name: Create OpenVPN config symbolic link
+  ansible.builtin.file:
+    src: /etc/openvpn/client/configs/config.ovpn
+    dest: /etc/openvpn/client/client.conf
+    state: link
+    force: yes
+    owner: openvpn
+    group: network
+
+- name: Update OpenVPN config auth-user-pass option
+  ansible.builtin.command:
+    cmd: "sed -i 's+auth-user-pass.*+auth-user-pass client_credentials+g' /etc/openvpn/client/client.conf"
+    removes: /usr/bin/VBox*
+
+- name: Enable openvpn-client@client.service
+  systemd:
+    name: openvpn-client@client.service
+    enabled: yes
+    daemon_reload: yes
+    masked: no
+
+- name: Start openvpn-client@client.service
+  systemd:
+    name: openvpn-client@client.service
+    state: started

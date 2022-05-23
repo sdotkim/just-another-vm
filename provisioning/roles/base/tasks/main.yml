@@ -1,0 +1,46 @@
+---
+- name: Sync database
+  community.general.pacman:
+    update_cache: yes
+
+- name: Install packages
+  community.general.pacman:
+    name:
+      - dmenu
+      - flatpak
+      - git
+      - i3-wm
+      - i3status
+      - openvpn
+      - net-tools
+      - tcpdump
+      - terminator
+      - traceroute
+      - vim
+      - xorg-server
+      - xorg-xinit
+    state: latest
+
+- name: Remove virtualbox-guest-utils-nox
+  community.general.pacman:
+    name: virtualbox-guest-utils-nox
+    state: absent
+    extra_args: --recursive
+    force: yes
+
+- name: Install virtualbox-guest-utils
+  community.general.pacman:
+    name: virtualbox-guest-utils
+    state: latest
+    extra_args: "--overwrite '*'"
+
+- name: Install Brave
+  community.general.flatpak:
+    name: com.brave.Browser
+    state: present
+
+- name: Create .xinitrc
+  become: yes
+  become_user: vagrant
+  ansible.builtin.command:
+    cmd: "echo 'exec i3' > /home/vagrant/.xinitrc"
