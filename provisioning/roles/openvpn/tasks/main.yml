@@ -5,18 +5,31 @@
     dest: /etc/openvpn/client/
     force: yes
 
-- name: Create OpenVPN config symbolic link
-  ansible.builtin.file:
-    src: /etc/openvpn/client/configs/config.ovpn
-    dest: /etc/openvpn/client/client.conf
-    state: link
+- name: Copy config shuffle script
+  ansible.builtin.copy:
+    src: /vagrant/guest_volume/usr/bin/openvpn-config-shuffle.sh
+    dest: /usr/bin
     force: yes
-    owner: openvpn
-    group: network
+    mode: 0755
 
-- name: Update OpenVPN config auth-user-pass option
-  ansible.builtin.command:
-    cmd: "sed -i 's+auth-user-pass.*+auth-user-pass client_credentials+g' /etc/openvpn/client/client.conf"
+- name: Copy config shuffle systemd service config
+  ansible.builtin.copy:
+    src: /vagrant/guest_volume/etc/systemd/system/openvpn-config-shuffle.service
+    dest: /etc/systemd/system/
+    force: yes
+    mode: 0644
+
+- name: Enable openvpn-config-shuffle.service
+  systemd:
+    name: openvpn-config-shuffle.service
+    enabled: yes
+    daemon_reload: yes
+    masked: no
+
+- name: Start openvpn-config-shuffle.service
+  systemd:
+    name: openvpn-config-shuffle.service
+    state: started
 
 - name: Enable openvpn-client@client.service
   systemd:

@@ -1,0 +1,9 @@
+[Unit]
+Description=Randomly pick OpenVPN server
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/openvpn-config-shuffle.sh
+
+[Install]
+WantedBy=multi-user.target
