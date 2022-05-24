@@ -1,13 +1,7 @@
 ---
-- name: Copy OpenVPN configs
+- name: Copy OpenVPN files
   ansible.builtin.copy:
-    src: /vagrant/etc/openvpn/configs
-    dest: /etc/openvpn/client/
-    force: yes
-
-- name: Copy OpenVPN credentials
-  ansible.builtin.copy:
-    src: /vagrant/etc/openvpn/client/client_credentials
+    src: /vagrant/guest_volume/etc/openvpn/client/
     dest: /etc/openvpn/client/
     force: yes
 
@@ -23,7 +17,6 @@
 - name: Update OpenVPN config auth-user-pass option
   ansible.builtin.command:
     cmd: "sed -i 's+auth-user-pass.*+auth-user-pass client_credentials+g' /etc/openvpn/client/client.conf"
-    removes: /usr/bin/VBox*
 
 - name: Enable openvpn-client@client.service
   systemd:

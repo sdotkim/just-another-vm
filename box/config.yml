@@ -27,6 +27,6 @@ vagrant_synced_folders:
   # The first synced folder will be used for the default Drupal installation, if
   # any of the build_* settings are 'true'. By default the folder is set to
   # the drupal-vm folder.
-  - local_path: ./guest_volume
+  - local_path: .
     destination: /vagrant
     create: true

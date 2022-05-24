@@ -39,8 +39,8 @@
     name: com.brave.Browser
     state: present
 
-- name: Create .xinitrc
-  become: yes
-  become_user: vagrant
-  ansible.builtin.command:
-    cmd: "echo 'exec i3' > /home/vagrant/.xinitrc"
+- name: Copy user home content
+  ansible.builtin.copy:
+    src: /vagrant/guest_volume/home/vagrant/
+    dest: /home/vagrant/
+    force: yes
