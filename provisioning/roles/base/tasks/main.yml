@@ -12,11 +12,15 @@
       - i3-wm
       - i3status
       - openvpn
+      - pip-env
+      - python-pipenv
+      - python-pipenv-to-requirements
       - net-tools
       - tcpdump
       - terminator
       - traceroute
       - vim
+      - wget
       - xorg-server
       - xorg-xinit
     state: latest
