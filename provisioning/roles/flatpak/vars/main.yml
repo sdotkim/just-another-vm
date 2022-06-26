@@ -1,0 +1,9 @@
+---
+# vars file for flatpak
+flatpaks_list:
+  - "com.brave.Browser"
+  - "org.chromium.Chromium"
+  - "org.mozilla.firefox"
+  - "io.gitlab.librewolf-community"
+  - "com.jetbrains.PyCharm-Community"
+  - "com.discordapp.Discord"
