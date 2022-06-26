@@ -1,0 +1,19 @@
+---
+# vars file for base
+debian_packages:
+  - dmenu
+  - flatpak
+  - git
+  - gnome-software-plugin-flatpak
+  - i3-wm
+  - i3status
+  - openvpn
+  - pipenv
+  - net-tools
+  - tcpdump
+  - terminator
+  - traceroute
+  - vim
+  - wget
+  - ubuntu-desktop-minimal
+  - virtualbox-guest-x11

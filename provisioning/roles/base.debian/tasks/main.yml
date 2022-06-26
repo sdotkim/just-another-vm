@@ -1,0 +1,19 @@
+---
+- name: Update package database
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Upgrade packages
+  ansible.builtin.apt:
+    upgrade: yes
+
+- name: Install packages
+  ansible.builtin.apt:
+    name: "{{ debian_packages }}"
+    state: latest
+
+- name: Copy user home content
+  ansible.builtin.copy:
+    src: /vagrant/guest_volume/home/vagrant/
+    dest: /home/vagrant/
+    force: yes
